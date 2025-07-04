@@ -1,6 +1,6 @@
 # Minor-Projects
 
-A collection of minor but meaningful projects built during my early engineering journey. Includes hands-on work with Arduino, sensors, and beginner Python applications.
+A collection of minor but meaningful projects built before my engineering journey. Includes hands-on work with Arduino, sensors, and motors!
 
 ## Contents:
 
