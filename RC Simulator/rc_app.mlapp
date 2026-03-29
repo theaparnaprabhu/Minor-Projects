@@ -1,0 +1,127 @@
+classdef RC < matlab.apps.AppBase
+
+    % Properties that correspond to app components
+    properties (Access = public)
+        UIFigure                matlab.ui.Figure
+        RunSimulationButton     matlab.ui.control.Button
+        CapacitanceSlider       matlab.ui.control.Slider
+        CapacitanceSliderLabel  matlab.ui.control.Label
+        ResistanceSlider        matlab.ui.control.Slider
+        ResistanceSliderLabel   matlab.ui.control.Label
+        UIAxes                  matlab.ui.control.UIAxes
+    end
+
+    % Callbacks that handle component events
+    methods (Access = private)
+
+        % Button pushed function: RunSimulationButton
+        function RunSimulationButtonPushed(app, event)
+            % Get values from sliders
+R = app.ResistanceSlider.Value;
+C = app.CapacitanceSlider.Value;
+V = 5;
+
+tau = R * C;
+t = linspace(0, 5*tau, 1000);
+I = (V/R) * exp(-t/tau)
+
+% Charging
+Vc_charge = V * (1 - exp(-t/tau));
+
+% Discharging
+Vc_discharge = V * exp(-t/tau);
+
+% Plot on UIAxes
+plot(app.UIAxes, t, Vc_charge, 'b', t, Vc_discharge, 'r');
+legend(app.UIAxes, 'Charging', 'Discharging');
+title(app.UIAxes, 'RC Circuit Response');
+xlabel(app.UIAxes, 'Time');
+ylabel(app.UIAxes, 'Voltage');
+xlim(app.UIAxes, [0 5*tau]);
+ylim(app.UIAxes, [0 V]);
+        end
+    end
+
+    % Component initialization
+    methods (Access = private)
+
+        % Create UIFigure and components
+        function createComponents(app)
+
+            % Create UIFigure and hide until all components are created
+            app.UIFigure = uifigure('Visible', 'off');
+            app.UIFigure.Position = [100 100 747 507];
+            app.UIFigure.Name = 'MATLAB App';
+
+            % Create UIAxes
+            app.UIAxes = uiaxes(app.UIFigure);
+            title(app.UIAxes, 'RC Circuit Simulator')
+            xlabel(app.UIAxes, 'Time')
+            ylabel(app.UIAxes, 'Voltage')
+            zlabel(app.UIAxes, 'Z')
+            app.UIAxes.XGrid = 'on';
+            app.UIAxes.YGrid = 'on';
+            app.UIAxes.Position = [24 147 417 293];
+
+            % Create ResistanceSliderLabel
+            app.ResistanceSliderLabel = uilabel(app.UIFigure);
+            app.ResistanceSliderLabel.HorizontalAlignment = 'right';
+            app.ResistanceSliderLabel.Position = [467 350 64 22];
+            app.ResistanceSliderLabel.Text = 'Resistance';
+
+            % Create ResistanceSlider
+            app.ResistanceSlider = uislider(app.UIFigure);
+            app.ResistanceSlider.Limits = [100 1000];
+            app.ResistanceSlider.Position = [553 359 162 3];
+            app.ResistanceSlider.Value = 1000;
+
+            % Create CapacitanceSliderLabel
+            app.CapacitanceSliderLabel = uilabel(app.UIFigure);
+            app.CapacitanceSliderLabel.HorizontalAlignment = 'right';
+            app.CapacitanceSliderLabel.Position = [466 254 73 22];
+            app.CapacitanceSliderLabel.Text = 'Capacitance';
+
+            % Create CapacitanceSlider
+            app.CapacitanceSlider = uislider(app.UIFigure);
+            app.CapacitanceSlider.Limits = [0.0001 0.01];
+            app.CapacitanceSlider.Position = [561 263 154 3];
+            app.CapacitanceSlider.Value = 0.001;
+
+            % Create RunSimulationButton
+            app.RunSimulationButton = uibutton(app.UIFigure, 'push');
+            app.RunSimulationButton.ButtonPushedFcn = createCallbackFcn(app, @RunSimulationButtonPushed, true);
+            app.RunSimulationButton.FontSize = 14;
+            app.RunSimulationButton.FontWeight = 'bold';
+            app.RunSimulationButton.Position = [581 175 116 27];
+            app.RunSimulationButton.Text = 'Run Simulation';
+
+            % Show the figure after all components are created
+            app.UIFigure.Visible = 'on';
+        end
+    end
+
+    % App creation and deletion
+    methods (Access = public)
+
+        % Construct app
+        function app = RC
+
+            % Create UIFigure and components
+            createComponents(app)
+
+            % Register the app with App Designer
+            registerApp(app, app.UIFigure)
+
+            if nargout == 0
+                clear app
+            end
+        end
+
+        % Code that executes before app deletion
+        function delete(app)
+
+            % Delete UIFigure when app is deleted
+            delete(app.UIFigure)
+        end
+    end
+end
