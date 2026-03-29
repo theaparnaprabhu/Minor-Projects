@@ -1,0 +1,51 @@
+
+
+% RC CIRCUIT SIMULATOR:
+% Charging & Discharging of Capacitor 
+
+
+clc;
+clear;
+close all;
+
+
+R = input('Enter resistance (Ohm): ');
+C = input('Enter capacitance (Farad): ');
+V = 5;
+
+
+if R <= 0 || C <= 0
+    error('Resistance and Capacitance must be positive and non-zero');
+end
+
+
+tau = R * C;
+fprintf('Time constant (tau) = %.4f seconds\n', tau);
+
+
+t = linspace(0, 5*tau, 1000);
+
+
+Vc_charge = V * (1 - exp(-t/tau));
+Vc_discharge = V * exp(-t/tau);
+
+
+figure;
+
+
+subplot(2,1,1);
+plot(t, Vc_charge, 'b', 'LineWidth', 2);
+xline(tau, '--r', '\tau');
+title('Capacitor Charging');
+xlabel('Time');
+ylabel('Voltage');
+grid on;
+
+
+subplot(2,1,2);
+plot(t, Vc_discharge, 'r', 'LineWidth', 2);
+xline(tau, '--r', '\tau');
+title('Capacitor Discharging');
+xlabel('Time');
+ylabel('Voltage');
+grid on;
