@@ -15,4 +15,4 @@ A collection of minor but meaningful projects built before my engineering journe
 
 4. **EchoMeter with DHT11** - An integrated Arduino project that combines distance sensing using the HC-SR04 ultrasonic sensor with temperature and humidity monitoring via the DHT11 sensor. Ideal for learning sensor fusion and real-time environmental data collection.
 
-5. **RC Simulator with MATLAB** - Charging and Discharging curves of an RC circuit, plotted using MATLAB, later made better using MATLAB app, and visualized using LTspice
+5. **RC Simulator with MATLAB** - Charging and Discharging curves of an RC circuit, plotted using MATLAB, later made better using MATLAB app, and visualized using LTspice. 
