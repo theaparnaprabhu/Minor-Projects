@@ -11,6 +11,6 @@ A collection of minor but meaningful projects built before my engineering journe
    👉 This project was featured in the **Community Pulse** by **Arm**, recognizing its innovation and beginner-friendly design.
 
 3. **EchoMeter** – A distance measuring device built with an ultrasonic sensor and Arduino Uno.  
-   🔊 *“Listens like a bat, reports like a boss”* – EchoMeter shows real-time distances in both centimeters and meters, helping visualize the invisible.
+    – EchoMeter shows real-time distances in both centimeters and meters, helping visualize the invisible.
 
 4. **EchoMeter with DHT11** - An integrated Arduino project that combines distance sensing using the HC-SR04 ultrasonic sensor with temperature and humidity monitoring via the DHT11 sensor. Ideal for learning sensor fusion and real-time environmental data collection.
