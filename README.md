@@ -18,3 +18,5 @@ A collection of minor but meaningful projects built before my engineering journe
 5. **RC Simulator with MATLAB** - Charging and Discharging curves of an RC circuit, plotted using MATLAB, later made better using MATLAB app, and visualized using LTspice.
 
 6. **Interactive Signal Filtering Visualizer** - An interactive Python-based signal processing tool that visualizes and compares noise reduction using Moving Average, Weighted Moving Average, and Exponential filtering techniques.
+
+7. **PCB Design Practice (KiCad)** – A curated collection of PCB design and schematic projects completed during the summer before my second year of ECE, covering motor drivers, power supplies, analog, and digital circuits with a focus on practical PCB layout and hardware design skills.
